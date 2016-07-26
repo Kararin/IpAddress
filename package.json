@@ -7,14 +7,14 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start karma.conf.js"
+    "test": "karma start karma.conf.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
     "jasmine-core": "^2.2.0",
-    "karma": "^0.12.31",
+    "karma": "^0.12.37",
     "karma-babel-preprocessor": "^6.0.1",
     "karma-chrome-launcher": "^0.1.7",
     "karma-coverage": "^1.1.1",
