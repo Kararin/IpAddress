@@ -1,13 +1,10 @@
-define([], function () {
-    var isString = function (string) {
-        return typeof string === 'string';
-    };
-
+define(['../Validators/validators'], function (valid) {
     return {
         isValid: function (ipString) {
-        var values = isString(ipString) ? ipString.split('.') : [];
+            var values = valid.isString(ipString) ? ipString.split('.') : [],
+                iPv4NumbersCount = 4;
 
-        return values.every(item => item > 0 && item < 256);
-    }
+            return values.length === 4 && values.every(item => item > 0 && item < 256);
+        }
     };
 });
