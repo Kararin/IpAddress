@@ -52,4 +52,18 @@ define(['IpAddress/IpV4'], function(IpV4) {
         });
     });
 
+
+    describe('should convert Ipv4 to IpV6', function () {
+
+        it('should convert Ipv4 to IpV6', function () {
+            var result = '::123.255.233.122';
+
+            ipv4 = new IpV4('123.255.233.122');
+
+            expect(ipv4.toIpV6()).toBe(result);
+        });
+
+    });
+
+
 });

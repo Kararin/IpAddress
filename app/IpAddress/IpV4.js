@@ -28,6 +28,10 @@ define(['../Validators/validators'], function (valid) {
 
                 return difference < 0 ? -1 :
                     difference > 0 ? 1 : difference;
+            },
+
+            toIpV6: () => {
+                return `::${ipAddressValue}`;
             }
         };
     };
