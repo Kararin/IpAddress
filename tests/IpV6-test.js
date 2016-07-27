@@ -43,4 +43,21 @@ define(['IpAddress/IpV6'], function(ipv6) {
         });
     });
 
+    describe('ipV6 normalization', function () {
+
+        it('', function () {
+            var initValue = '::1',
+                result = '0000:0000:0000:0000:0000:0000:0000:0001';
+
+            expect(ipv6.normalize(initValue)).toBe(result);
+        });
+
+        it('', function () {
+            var initValue = 'FF02::2',
+                result = 'FF02:0000:0000:0000:0000:0000:0000:0002';
+
+            expect(ipv6.normalize(initValue)).toBe(result);
+        });
+
+    });
 });
