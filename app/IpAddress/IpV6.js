@@ -7,7 +7,8 @@ define([
             }
         },
         emptyValue = '',
-        iPv6NumberCount = 8;
+        iPv6NumberCount = 8,
+        delimiter = ':';
 
     var IpV6 = function () {
         var ipAddressValue,
@@ -18,16 +19,16 @@ define([
     };
 
     IpV6.isValid = (ipValue) => {
-        var hexNumbers = valid.isEmpty(ipValue) ? [] : (ipValue + '').trim().split(':'),
+        var hexNumbers = valid.isEmpty(ipValue) ? [] : (ipValue + emptyValue).trim().split(delimiter),
             conditions = {
                 length: hexNumbers.length > 0 && hexNumbers.length <= iPv6NumberCount,
-                allHexadecimal: hexNumbers.filter(item => item !== '').every(item => {
+                allHexadecimal: hexNumbers.filter(item => item !== emptyValue).every(item => {
                     return valid.isHexadecimal(item);
                 }),
-                beginOrEndWithzeros: (hexNumbers.indexOf('') === 0 || hexNumbers.indexOf('') === hexNumbers.length) &&
-                    hexNumbers.filter(item => item === '').length >= 2,
-                zerosInTheMiddle: (hexNumbers.indexOf('') !== 0 || hexNumbers.indexOf('') !== hexNumbers.length) &&
-                    hexNumbers.filter(item => item === '').length < 2
+                beginOrEndWithzeros: (hexNumbers.indexOf(emptyValue) === 0 || hexNumbers.indexOf(emptyValue) === hexNumbers.length) &&
+                    hexNumbers.filter(item => item === emptyValue).length >= 2,
+                zerosInTheMiddle: (hexNumbers.indexOf(emptyValue) !== 0 || hexNumbers.indexOf(emptyValue) !== hexNumbers.length) &&
+                    hexNumbers.filter(item => item === emptyValue).length < 2
             };
 
         return conditions.length && conditions.allHexadecimal &&
@@ -37,7 +38,7 @@ define([
     IpV6.normalize = (ipString) => {
         validation(ipString);
 
-        var numbers = ipString.split(':'),
+        var numbers = ipString.split(delimiter),
             firstEmptyIndex,
             notEmptyNumbersCount,
             index;
@@ -66,7 +67,16 @@ define([
             }
 
             return stringItem;
-        }).join(':');
+        }).join(delimiter);
+    };
+
+    IpV6.parse = (ipString) => {
+        var normalizeString;
+
+        validation(ipString);
+        normalizeString = IpV6.normalize(ipString);
+
+        return normalizeString.split(delimiter);
     };
 
     return IpV6;

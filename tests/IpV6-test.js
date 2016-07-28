@@ -44,27 +44,44 @@ define(['IpAddress/IpV6'], function(ipv6) {
     });
 
     describe('ipV6 normalization', function () {
-
-        it('', function () {
+        it('::1 should be 0000:0000:0000:0000:0000:0000:0000:0001', function () {
             var initValue = '::1',
                 result = '0000:0000:0000:0000:0000:0000:0000:0001';
 
             expect(ipv6.normalize(initValue)).toBe(result);
         });
 
-        it('', function () {
+        it('FF02::2 should be FF02:0000:0000:0000:0000:0000:0000:0002', function () {
             var initValue = 'FF02::2',
                 result = 'FF02:0000:0000:0000:0000:0000:0000:0002';
 
             expect(ipv6.normalize(initValue)).toBe(result);
         });
 
-        it('::', function () {
+        it(':: should be 0000:0000:0000:0000:0000:0000:0000:0000', function () {
             var initValue = '::',
                 result = '0000:0000:0000:0000:0000:0000:0000:0000';
 
             expect(ipv6.normalize(initValue)).toBe(result);
         });
+    });
+
+    describe('ipV6 parsing', function () {
+
+        it('::1 should be 0000:0000:0000:0000:0000:0000:0000:0001', function () {
+            var initValue = '::1',
+                result = '[0,0,0,0,0,0,0,1]';
+
+            expect(ipv6.parse(initValue)).toEqual(result);
+        });
+
+        it('::1 should be 0000:0000:0000:0000:0000:0000:0000:0001', function () {
+            var initValue = '::1',
+                result = '[0,0,0,0,0,0,0,1]';
+
+            expect(ipv6.parse(initValue)).toEqual(result);
+        });
 
     });
+
 });
