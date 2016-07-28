@@ -39,14 +39,17 @@ define([
 
         var numbers = ipString.split(':'),
             firstEmptyIndex,
-            notEmptyNumbersCount;
+            notEmptyNumbersCount,
+            index;
 
-        if (numbers.length !== iPv6NumberCount) {
+        if (numbers.length < iPv6NumberCount) {
             firstEmptyIndex = numbers.indexOf(emptyValue);
 
             notEmptyNumbersCount = numbers.filter(item => item !== emptyValue).length;
 
-            numbers.splice(firstEmptyIndex, 0 , ...(new Array(iPv6NumberCount - notEmptyNumbersCount - 2).fill(0)));
+            while (numbers.length !== iPv6NumberCount) {
+                numbers.splice(firstEmptyIndex, 0 , 0);
+            }
         }
 
 

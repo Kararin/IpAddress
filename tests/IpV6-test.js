@@ -59,5 +59,12 @@ define(['IpAddress/IpV6'], function(ipv6) {
             expect(ipv6.normalize(initValue)).toBe(result);
         });
 
+        it('::', function () {
+            var initValue = '::',
+                result = '0000:0000:0000:0000:0000:0000:0000:0000';
+
+            expect(ipv6.normalize(initValue)).toBe(result);
+        });
+
     });
 });
